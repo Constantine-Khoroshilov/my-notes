@@ -114,3 +114,38 @@
 
 ## Наследование
 
+Вынесение *общих свойств и методов* из каких-либо классов в один общий родительский класс
+
+В Java нельзя наследоваться от двух классов одновременно
+
+	// класс "Сотрудник"
+	public class Employee {
+		private String name;
+		// для хранения денег намного лучше использовать целочисленные типы
+		private long salary;
+		
+		// конструктор
+		public Employee(String name_, long salary_) {
+			name = name_;
+			salary = salary_;
+		}
+		
+		public long getSalary() {
+			return salary;
+		}
+	}
+	
+	public class Doctor extends Employee {
+		private int category;
+	
+		public Doctor(String name_, long salary_, int category_) {
+			// вызываем конструктор родительского класса
+			super(name_, salary_);
+			category = category_;
+		}
+	}
+
+
+
+
+
