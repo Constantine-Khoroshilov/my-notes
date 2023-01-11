@@ -23,7 +23,7 @@
 
 ### Описание класса в Java
 
-В Java один класс - один файл
+В Java один класс - один файл 
 
 	public class Car {
 		String color;
