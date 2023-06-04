@@ -29,13 +29,15 @@
 **D** _Принцип инверсии зависимостей (dependency inversion principle)_: Зависимость на Абстракциях. нет зависимости на что-то конкретное. То есть необходимо создать некоторый интерфейс, а реализация нас более менее не волнует (В Java для этого есть "интерфейсы", а в Python используются абстрактные классы).
 
 
-	class Rectangle:
-		# Статический атрибут (с ним можно работать без создания объекта)
-		default_color = "green"
-		def __init__(self, width, height):
-			# Динамические атрибуты
-			self.width = width
-			self.height = height
+```python
+class Rectangle:
+	# Статический атрибут (с ним можно работать без создания объекта)
+	default_color = "green"
+	def __init__(self, width, height):
+		# Динамические атрибуты
+		self.width = width
+		self.height = height
+```
 
 **Замечание:** В Python нет *перегрузки функций*, т. е. если в классе есть, например, метод \_\_init\_\_, то он обязательно один. Нет возможности создать несколько конструкторов.
 
@@ -51,18 +53,20 @@
 
 ## Статические и классовые методы
 
-	class ToyClass:
-		# Экземплярный метод
-		def instancemethod(self):
-			return 'instance method called', self
-		
-		@classmethod
-		def classmethod(cls):
-			return 'class method called', cls
-		
-		@staticmethod # обвёртка декоратором
-		def staticmethod():
-			return 'static method called'
+```python
+class ToyClass:
+	# Экземплярный метод
+	def instancemethod(self):
+		return 'instance method called', self
+
+	@classmethod
+	def classmethod(cls):
+		return 'class method called', cls
+
+	@staticmethod # обвёртка декоратором
+	def staticmethod():
+		return 'static method called'
+```
 
 
 ## Абстрактные классы
@@ -72,14 +76,15 @@
 
 ## Обработка исключений
 
-	try:
-		# исполняем какой-то код
-	except Exception as e: # лучше всегда писать, какой исключение обрабатываем
-		# обработка исключения
-	else:
-		# код, который будет исполнен в случае, когда не возникнет исключения
-	finally:
-		# код, который гарантированно будет исполнен последним (всегда исполняется)
-
+```python
+try:
+	# исполняем какой-то код
+except Exception as e: # лучше всегда писать, какой исключение обрабатываем
+	# обработка исключения
+else:
+	# код, который будет исполнен в случае, когда не возникнет исключения
+finally:
+	# код, который гарантированно будет исполнен последним (всегда исполняется)
+```
 
 

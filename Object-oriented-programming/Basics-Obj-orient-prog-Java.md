@@ -25,37 +25,40 @@
 
 В Java один класс - один файл 
 
-	public class Car {
-		String color;
-		String form;
-		double engineV;
-		double fuelConsumption; // расход на 100 км
-		String id;
-		double fuelInTank; // остаток топлива
-		
-		// заправить авто
-		void fillTank(int fuelV) {
-			fuelInTank = fuelInTank + fuelV;
-		}
-		
-		// проехать расстояние
-		void drive(double distance) {
-			fuelInTank = fuelInTank - distance / 100 * fuelConsumption;
-		}
+```java
+public class Car {
+	String color;
+	String form;
+	double engineV;
+	double fuelConsumption; // расход на 100 км
+	String id;
+	double fuelInTank; // остаток топлива
+	
+	// заправить авто
+	void fillTank(int fuelV) {
+		fuelInTank = fuelInTank + fuelV;
 	}
+	
+	// проехать расстояние
+	void drive(double distance) {
+		fuelInTank = fuelInTank - distance / 100 * fuelConsumption;
+	}
+}
+```
 
 ### Создание объекта в Java и взаимодействие с ним
 
+```java
 	Car myCar = new Car(); // очевидно, что нельзя просто присвоить значение
 		// new - оператор, к-ый создает объекты класса
 	
 	myCar.fuelInTank = 10;
 	myCar.fillTank(fuelV:20);
-	
+```
 
 ### Оператор new в Java
 
-	new <конструктор>
+`new <конструктор>`
 
 * Выделяет *память* под объект
 * Создает *новый* объект (вызывает конструктор)
@@ -71,19 +74,21 @@
 
 Конструктор(ы) описывает(ют)ся внутри класса. Конструкторов может быть несколько, они различаются *порядком следования параметров* и *их типами данных* - это называется *перегрузкой* (в данном случае конструктора) - вид **полиморфизма**
 
-	// конструктор без параметров
-	Car() {
-		fuelInTank = 0;
-		id = "BB001";
-	}
-	
-	// конструктор с параметрами
-	Car(String id, double fuelInTank) {
-		this.fuelInTank = fuelInTank;
-		this.id = id;
-	}
-	
-	Car myCar = new Car(id:"BB001", fuelInTank:0);
+```java
+// конструктор без параметров
+Car() {
+	fuelInTank = 0;
+	id = "BB001";
+}
+
+// конструктор с параметрами
+Car(String id, double fuelInTank) {
+	this.fuelInTank = fuelInTank;
+	this.id = id;
+}
+
+Car myCar = new Car(id:"BB001", fuelInTank:0);
+```
 
 **Замечание:** ключевое слово this (в Object Pascal используется self) - ссылка на *текущий* объект, экземляр класса. Может использоваться для устранения неоднозначности наименований переменных внутри объекта, конструктора (см. пример выше).
 
@@ -98,15 +103,17 @@
 
 Хорошая практика, что бы *все* свойства класса являлись закрытыми, чтобы нельзя было их *изменить* напрямую. Для взаимодействия со свойствами класса лучше всего использовать открытые методы:
 
-	public class Brush {
-		private String color;
-		public String getColor() { // геттор
-			return color;
-		}
-		public void setColor(String newColor) { // сеттор
-			color = newColor;
-		}
+```java
+public class Brush {
+	private String color;
+	public String getColor() { // геттор
+		return color;
 	}
+	public void setColor(String newColor) { // сеттор
+		color = newColor;
+	}
+}
+```
 
 
 ## Наследование
@@ -115,32 +122,34 @@
 
 В Java нельзя наследоваться от двух классов одновременно
 
-	// класс "Сотрудник"
-	public class Employee {
-		private String name;
-		// для хранения денег намного лучше использовать целочисленные типы
-		private long salary;
-		
-		// конструктор
-		public Employee(String name_, long salary_) {
-			name = name_;
-			salary = salary_;
-		}
-		
-		public long getSalary() {
-			return salary;
-		}
+```java
+// класс "Сотрудник"
+public class Employee {
+	private String name;
+	// для хранения денег намного лучше использовать целочисленные типы
+	private long salary;
+	
+	// конструктор
+	public Employee(String name_, long salary_) {
+		name = name_;
+		salary = salary_;
 	}
 	
-	public class Doctor extends Employee {
-		private int category;
-	
-		public Doctor(String name_, long salary_, int category_) {
-			// вызываем конструктор родительского класса
-			super(name_, salary_);
-			category = category_;
-		}
+	public long getSalary() {
+		return salary;
 	}
+}
+
+public class Doctor extends Employee {
+	private int category;
+
+	public Doctor(String name_, long salary_, int category_) {
+		// вызываем конструктор родительского класса
+		super(name_, salary_);
+		category = category_;
+	}
+}
+```
 
 
 ## Полиморфизм. Переопределение методов в Java
@@ -157,17 +166,19 @@
 
 Пусть есть родительский класс и его наследник, тогда объект наследника будет в то же время являться объектом родительского класса. Пример с классом Employee и его подклассом Doctor: 
 
-	// родительский класс
-	public class Employee {}
-	// его наследники
-	public class Doctor extends Employee {}
-	public class Builder extends Employee {}
-	
-	// переменные, к-ые содержат ссылку на объект класса Employee
-	Employee emp_1, emp_2;
-	// Так будет работать. Объект класса Doctor, Builder как частный случай объекта класса Employee
-	emp_1 = new Doctor()
-	emp_2 = new Builder()
+```java
+// родительский класс
+public class Employee {}
+// его наследники
+public class Doctor extends Employee {}
+public class Builder extends Employee {}
+
+// переменные, к-ые содержат ссылку на объект класса Employee
+Employee emp_1, emp_2;
+// Так будет работать. Объект класса Doctor, Builder как частный случай объекта класса Employee
+emp_1 = new Doctor()
+emp_2 = new Builder()
+```
 
 ### Переопределение методов в базовом (родительском) классе
 
@@ -201,46 +212,47 @@
 
 Переопределим в дочернем классе Doctor метод getSalary, метод родительского класса Employee, с помощью @Override:
 
-	public class Doctor extends Employee {
-		private int category;
-	
-		public Doctor(String name_, long salary_, int category_) {
-			// вызываем конструктор родительского класса
-			super(name_, salary_);
-			category = category_;
-		}
-		
-		@Override
-		public long getSalary() {
-			return salary * 1.15; 
-			// другая реализация, но название и параметры метода 
-			// точно такие же как и в родительском классе 
-		}
+```java
+public class Doctor extends Employee {
+	private int category;
+
+	public Doctor(String name_, long salary_, int category_) {
+		// вызываем конструктор родительского класса
+		super(name_, salary_);
+		category = category_;
 	}
+	
+	@Override
+	public long getSalary() {
+		return salary * 1.15; 
+		// другая реализация, но название и параметры метода 
+		// точно такие же как и в родительском классе 
+	}
+}
+```
 
 В основной программе:
 
-	public class MainClass {
-		public static void main(String[] args) {
-			
-			// Массив сотрудников, элементами к-го могут являться объекты любого подкласса Employee (это полиморфизм подтипов)
-			Employee[] emps = new Employee[3];
-			
-			// Заполняем
-			emps[0] = new Doctor(name_: "Николай", salary_: 40000, category_: 3);
-			
-			// Пусть есть еще один подкласс Builder, в к-ом метод getSalary имеет свою реализацию, 
-			// увеличивающую ЗП вдвое, но не переопределен с помощью @Override
-			emps[1] = new Builder(name_: "Андрей", salary_: 17000);
-			
-			for (int i = 0; i < emps.length; i++)
-				System.out.print("Зарплата сотрудника: " + emps[i].getSalary());
-				// Для объекта подкласса Doctor будет выведено 80000,
-				// была вызвана реализация в подклассе Doctor, т. к. метод переопределен
-				// Для объекта подкласса Builder будет выведено 17000,
-				// была вызвана реализация в классе Employee, т. к. метод не переопределен
-		}
+```java
+public class MainClass {
+	public static void main(String[] args) {
+		
+		// Массив сотрудников, элементами к-го могут являться объекты любого подкласса Employee (это полиморфизм подтипов)
+		Employee[] emps = new Employee[3];
+		
+		// Заполняем
+		emps[0] = new Doctor(name_: "Николай", salary_: 40000, category_: 3);
+		
+		// Пусть есть еще один подкласс Builder, в к-ом метод getSalary имеет свою реализацию, 
+		// увеличивающую ЗП вдвое, но не переопределен с помощью @Override
+		emps[1] = new Builder(name_: "Андрей", salary_: 17000);
+		
+		for (int i = 0; i < emps.length; i++)
+			System.out.print("Зарплата сотрудника: " + emps[i].getSalary());
+			// Для объекта подкласса Doctor будет выведено 80000,
+			// была вызвана реализация в подклассе Doctor, т. к. метод переопределен
+			// Для объекта подкласса Builder будет выведено 17000,
+			// была вызвана реализация в классе Employee, т. к. метод не переопределен
 	}
-
-
-
+}
+```
