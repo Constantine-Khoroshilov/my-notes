@@ -1,19 +1,19 @@
 # Связанный список
 
 Это структура данных, которая представляет собой список данных,
-состоящий из *узлов*. Связанный список позволяет осуществлять 
+состоящий из **узлов**. Связанный список позволяет осуществлять 
 удаление и вставку элементов более удобным способом, чем 
 классический массив. 
 
 * __Однонаправленный__. Такой связанный список, в котором каждый 
 *предыдущий* узел имеет ссылку на *следующий* узел.
 
-```java
+```c#
 
 class Node {
-	Node next;
-	int data;
-	Node(int data) { this.data = data; }
+    Node next;
+    int data;
+    Node(int data) { this.data = data; }
 }
 
 ```
@@ -21,13 +21,13 @@ class Node {
 * __Двунаправленный__. Такой связанный список, в котором каждый
 узел имеет ссылку как на *следующий узел, так и на предыдущий*.
 
-```java
+```c#
 
 class Node {
-	Node next;
-	Node prev;
-	int data;
-	Node(int data) { this.data = data; }
+    Node next;
+    Node prev;
+    int data;
+    Node(int data) { this.data = data; }
 }
 
 ```
@@ -42,61 +42,61 @@ class Node {
 
 Пример вставки элемента в начало для однонаправленного связанного списка:
 
-```java
+```c#
 
 void addStart(int n) {
-	Node node = new Node(n);
-	/* если изначально список был пуст, то добавляемый элемент
-	 * становится и головой, и хвостом
-	 */
-	if (head == null) tail = node;
-	else node.next = head;
-	head = node;
+    Node node = new Node(n);
+    /* если изначально список был пуст, то добавляемый элемент
+     * становится и головой, и хвостом
+     */
+    if (head == null) tail = node;
+    else node.next = head;
+    head = node;
 }
 
 ```
 
 Пример вставки элемента в конец для однонаправленного связанного списка:
 
-```java
+```c#
 
 void addEnd(int n) {
-	Node node = new Node(n);
-	/* если изначально список был пуст, то добавляемый элемент
-	 * становится и головой, и хвостом
-	 */
-	if (tail == null) head = node;
-	else tail.next = node;
-	tail = node;
+    Node node = new Node(n);
+    /* если изначально список был пуст, то добавляемый элемент
+     * становится и головой, и хвостом
+     */
+    if (tail == null) head = node;
+    else tail.next = node;
+    tail = node;
 }
 
 ```
 
-Пример вставки элмента в середину для однонаправленного связанного списка:
+Пример вставки элемента в "середину" для однонаправленного связанного списка:
 
-```java
+```c#
 
 void insertAfter(int aftreN, int n) {
-	Node searchNode = search(aftreN); // поиск исходного элемента в списке
-	if (searchNode != null) {
-		Node node = new Node(n); // новый узел для вставки
+    Node searchNode = search(aftreN); // поиск исходного элемента в списке
+    if (searchNode != null) {
+        Node node = new Node(n); // новый узел для вставки
 
-		if (searchNode == tail) tail = node;
-		// меняем ссылки соответственно
-		node.next = searchNode.next;
-		searchNode.next = node;
-	}
+        if (searchNode == tail) tail = node;
+        // меняем ссылки соответственно
+        node.next = searchNode.next;
+        searchNode.next = node;
+    }
 }
 
 Node search(int n) {
-	Node searchNode = head;
-	while (searchNode != null) {
-		if (searchNode.data == n) return searchNode;
+    Node searchNode = head;
+    while (searchNode != null) {
+        if (searchNode.data == n) return searchNode;
 
-		searchNode = searchNode.next; 
-	}
-	
-	return null;
+        searchNode = searchNode.next; 
+    }
+    
+    return null;
 }
 
 ``` 
