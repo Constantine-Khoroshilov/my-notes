@@ -49,11 +49,11 @@ public class Car {
 ### Создание объекта в Java и взаимодействие с ним
 
 ```java
-	Car myCar = new Car(); // очевидно, что нельзя просто присвоить значение
-		// new - оператор, к-ый создает объекты класса
-	
-	myCar.fuelInTank = 10;
-	myCar.fillTank(fuelV:20);
+Car myCar = new Car(); // очевидно, что нельзя просто присвоить значение
+	// new - оператор, к-ый создает объекты класса
+
+myCar.fuelInTank = 10;
+myCar.fillTank(fuelV:20);
 ```
 
 ### Оператор new в Java
